@@ -1,5 +1,10 @@
 import nltk
+import pandas as pd
+import re
+from nltk.corpus import stopwords
 
+nltk.download('punkt', quiet=True)
+nltk.download('stopwords', quiet=True)
 """
 Helper functions for data mining lab session 2018 Fall Semester
 Author: Elvis Saravia
@@ -26,13 +31,31 @@ def check_missing_values(row):
             counter+=1
     return ("The amoung of missing records is: ", counter)
 
-def tokenize_text(text, remove_stopwords=False):
+
+def tokenize_text(text, remove_stopwords=True, min_length=2):
     """
-    Tokenize text using the nltk library
+    Tokenize text using NLTK, optionally removing stopwords and non-alphabetic tokens.
+    
+    Args:
+        text (str): Input text to tokenize.
+        remove_stopwords (bool): Whether to remove English stopwords.
+        min_length (int): Minimum word length to keep.
+    
+    Returns:
+        list: List of cleaned, lowercased tokens.
     """
-    tokens = []
-    for d in nltk.sent_tokenize(text, language='english'):
-        for word in nltk.word_tokenize(d, language='english'):
-            # filters here
-            tokens.append(word)
+    if not isinstance(text, str):
+        return []
+    
+    # Tokenize into words
+    tokens = nltk.word_tokenize(text.lower(), language='english')
+    
+    # Keep only alphabetic tokens of sufficient length
+    tokens = [word for word in tokens if word.isalpha() and len(word) >= min_length]
+    
+    # Optionally remove stopwords
+    if remove_stopwords:
+        stop_words = set(stopwords.words('english'))
+        tokens = [word for word in tokens if word not in stop_words]
+    
     return tokens
