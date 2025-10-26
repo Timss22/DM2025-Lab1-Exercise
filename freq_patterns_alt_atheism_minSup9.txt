@@ -2638,9 +2638,9 @@ nyx	du:14
 hearing:14
 hearing	entire:9
 hearing	entire	lie:9
+hearing	wasn:10
 hearing	lie:10
 hearing	lie	wasn:9
-hearing	wasn:10
 year:14
 required:14
 thinks:14
@@ -3373,8 +3373,8 @@ allow	supposed:9
 whose:20
 local:20
 proof:20
-proof	ones:9
 proof	nor:9
+proof	ones:9
 meant:20
 gave:20
 marriage:20
